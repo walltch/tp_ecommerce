@@ -1,0 +1,7 @@
+# messages.en.yaml
+
+login:
+  title: Please sign in
+  password: Password
+  remember-me: Remember me
+  sign-in: Sign in
