@@ -14,9 +14,6 @@ class Panier
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
-    private ?User $user = null;
-
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $dateAchat = null;
 
@@ -26,18 +23,6 @@ class Panier
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(?User $user): static
-    {
-        $this->user = $user;
-
-        return $this;
     }
 
     public function getDateAchat(): ?\DateTimeInterface
