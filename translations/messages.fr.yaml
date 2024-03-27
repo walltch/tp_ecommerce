@@ -1,3 +1,7 @@
 # messages.fr.yaml
 
-show: Afficher
+login:
+  title: Inscrivez-vous
+  password: Mot de passe
+  remember-me: Se souvenir de moi
+  sign-in: S'inscrire
