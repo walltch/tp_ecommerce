@@ -7,6 +7,7 @@ use App\Entity\Produit;
 use App\Form\ContenuPanierType;
 use App\Repository\ContenuPanierRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,21 +25,24 @@ class ContenuPanierController extends AbstractController
     }
 
     #[Route('/new/{id}', name: 'app_contenu_panier_new', methods: ['GET','POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager, int $id): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, int $id, LoggerInterface $l): Response
     {
+        $l->error('1');
         // Récupérer le produit associé à l'identifiant
-        $produit = $entityManager->getRepository(Produit::class)->find($id);
+        $produit = $entityManager->getRepository(Produit::class)->findOneById($id);
     
         // Créer une nouvelle instance de ContenuPanier
         $contenuPanier = new ContenuPanier();
         // Assurez-vous d'associer le produit récupéré à l'entité ContenuPanier
         $contenuPanier->setProduit($produit);
+        $contenuPanier->setDate(new \DateTime());
     
         // Créer le formulaire en passant l'entité ContenuPanier
         $form = $this->createForm(ContenuPanierType::class, $contenuPanier);
         $form->handleRequest($request);
-    
-        if ($form->isSubmitted() && $form->isValid()) {
+        $l->error('2');
+        // if ($form->isSubmitted() && $form->isValid()) {
+            $l->error('3');
             // Ajouter le produit au panier
             $contenuPanier->setQuantite($contenuPanier->getQuantite() + 1);
             $entityManager->persist($contenuPanier);
@@ -46,12 +50,12 @@ class ContenuPanierController extends AbstractController
     
             // Rediriger l'utilisateur vers la page du contenu du panier
             return $this->redirectToRoute('app_contenu_panier_index');
-        }
+        // }
     
-        return $this->render('contenu_panier/new.html.twig', [
-            'contenu_panier' => $contenuPanier,
-            'form' => $form->createView(),
-        ]);
+        // return $this->render('contenu_panier/new.html.twig', [
+        //     'contenu_panier' => $contenuPanier,
+        //     'form' => $form->createView(),
+        // ]);
     }
 
 
