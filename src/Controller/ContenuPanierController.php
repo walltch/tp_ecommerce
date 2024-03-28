@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\ContenuPanier;
+use App\Entity\Produit;
 use App\Form\ContenuPanierType;
 use App\Repository\ContenuPanierRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -22,25 +23,37 @@ class ContenuPanierController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_contenu_panier_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    #[Route('/new/{id}', name: 'app_contenu_panier_new', methods: ['GET','POST'])]
+    public function new(Request $request, EntityManagerInterface $entityManager, int $id): Response
     {
+        // Récupérer le produit associé à l'identifiant
+        $produit = $entityManager->getRepository(Produit::class)->find($id);
+    
+        // Créer une nouvelle instance de ContenuPanier
         $contenuPanier = new ContenuPanier();
+        // Assurez-vous d'associer le produit récupéré à l'entité ContenuPanier
+        $contenuPanier->setProduit($produit);
+    
+        // Créer le formulaire en passant l'entité ContenuPanier
         $form = $this->createForm(ContenuPanierType::class, $contenuPanier);
         $form->handleRequest($request);
-
+    
         if ($form->isSubmitted() && $form->isValid()) {
+            // Ajouter le produit au panier
+            $contenuPanier->setQuantite($contenuPanier->getQuantite() + 1);
             $entityManager->persist($contenuPanier);
             $entityManager->flush();
-
-            return $this->redirectToRoute('app_contenu_panier_index', [], Response::HTTP_SEE_OTHER);
+    
+            // Rediriger l'utilisateur vers la page du contenu du panier
+            return $this->redirectToRoute('app_contenu_panier_index');
         }
-
+    
         return $this->render('contenu_panier/new.html.twig', [
             'contenu_panier' => $contenuPanier,
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
+
 
     #[Route('/{id}', name: 'app_contenu_panier_show', methods: ['GET'])]
     public function show(ContenuPanier $contenuPanier): Response
@@ -78,4 +91,5 @@ class ContenuPanierController extends AbstractController
 
         return $this->redirectToRoute('app_contenu_panier_index', [], Response::HTTP_SEE_OTHER);
     }
+
 }

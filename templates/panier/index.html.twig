@@ -21,8 +21,8 @@
                 <td>{{ panier.dateAchat ? panier.dateAchat|date('Y-m-d') : '' }}</td>
                 <td>{{ panier.etat ? 'Yes' : 'No' }}</td>
                 <td>
-                    <a href="{{ path('app_panier_show', {'id': panier.id}) }}">show</a>
-                    <a href="{{ path('app_panier_edit', {'id': panier.id}) }}">edit</a>
+                    <a href="{{ path('app_panier_show', {'id': panier.id}) }}">Voir</a>
+                    <a href="{{ path('app_panier_edit', {'id': panier.id}) }}">Editer</a>
                 </td>
             </tr>
         {% else %}

@@ -31,9 +31,16 @@
                     {% endif %}
                 </td>
                 <td>
-                    <a href="{{ path('app_produit_show', {'id': produit.id}) }}">show</a>
-                    <a href="{{ path('app_produit_edit', {'id': produit.id}) }}">edit</a>
+                    <a href="{{ path('app_produit_show', {'id': produit.id}) }}">Voir</a>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a href="{{ path('app_produit_edit', {'id': produit.id}) }}">Editer</a>
+                    {% endif %}
                 </td>
+                 {% if not is_granted('ROLE_ADMIN') %}
+                    <form action="{{ path('app_contenu_panier_new', {'id': produit.id}) }}" method="POST">
+                        <button type="submit" class="btn btn-success">Ajouter au Panier</button>
+                    </form>
+                {% endif %}
             </tr>
         {% else %}
             <tr>
@@ -42,7 +49,7 @@
         {% endfor %}
         </tbody>
     </table>
-
+   
     {% if is_granted('ROLE_ADMIN') %}
         <a href="{{ path('app_produit_new') }}">Ajouter un produit.</a>
     {% endif %}
