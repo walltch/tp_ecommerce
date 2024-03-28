@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\ContenuPanier;
 use App\Entity\Panier;
 use App\Entity\Produit;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -15,13 +16,16 @@ class ContenuPanierType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('quantite')
-            ->add('date', null, [
-                'widget' => 'single_text'
+            ->add('quantite', null, [
+                'data' => 1, 
+            ])
+            ->add('date', DateTimeType::class, [
+                'data' => new \DateTime(), 
+                'widget' => 'single_text',
             ])
             ->add('produit', EntityType::class, [
                 'class' => Produit::class,
-'choice_label' => 'id',
+'choice_label' => 'nom',
             ])
             ->add('panier', EntityType::class, [
                 'class' => Panier::class,

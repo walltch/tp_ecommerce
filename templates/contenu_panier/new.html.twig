@@ -3,9 +3,12 @@
 {% block title %}New ContenuPanier{% endblock %}
 
 {% block body %}
-    <h1>Create new ContenuPanier</h1>
+    <h1>Contenu panier</h1>
 
     {{ include('contenu_panier/_form.html.twig') }}
 
-    <a href="{{ path('app_contenu_panier_index') }}">back to list</a>
+    <h2>Submitted Data</h2>
+    <pre>{{ dump(form.vars.data) }}</pre>
+
+    <a href="{{ path('app_contenu_panier_index') }}">Retour</a>
 {% endblock %}
