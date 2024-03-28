@@ -41,13 +41,8 @@ security:
     access_control:
     - { path: ^/admin, roles: ROLE_ADMIN }
     - { path: ^/user, roles: ROLE_ADMIN }
-<<<<<<< HEAD
-    - { path: ^/produit/new, roles: ROLE_ADMIN }
-    - { path: ^/panier/, roles: ROLE_USER }
-=======
     - { path: ^/produit, roles: ROLE_ADMIN }
 
->>>>>>> a48cd24 (affichage des produits)
 when@test:
     security:
         password_hashers:
