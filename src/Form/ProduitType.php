@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Produit;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -17,6 +18,9 @@ class ProduitType extends AbstractType
             ->add('prix')
             ->add('stock')
             ->add('photo')
+            ->add('save', SubmitType::class, [
+                'label' => $options['button_label'], 
+            ]);
         ;
     }
 
@@ -24,6 +28,7 @@ class ProduitType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Produit::class,
+            'button_label' => 'Save',
         ]);
     }
 }
