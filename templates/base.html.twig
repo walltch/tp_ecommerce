@@ -37,10 +37,12 @@
               </a>
             </li>
             <li>
+            {% if is_granted('ROLE_USER') %}
              <a href="{{path('app_default')}}" class="nav-link text-white">
                 <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#table"/></svg>
                 Mes commandes
               </a>
+            {% endif %}
             </li>
             <li>
               <a href="{{path('app_panier_new')}}" class="nav-link text-white">
