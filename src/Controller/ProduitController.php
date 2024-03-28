@@ -29,7 +29,10 @@ class ProduitController extends AbstractController
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $produit = new Produit();
-        $form = $this->createForm(ProduitType::class, $produit);
+        $form = $this->createForm(ProduitType::class, $produit,[
+            'button_label' => 'Enregistrer' 
+        ]);
+        
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -100,7 +103,7 @@ class ProduitController extends AbstractController
         ]);
     }
 
-    #[Route('/delete/{id}', name: 'app_produit_delete', methods: ['POST'])]
+    #[Route('/{id}', name: 'app_produit_delete', methods: ['POST'])]
     public function delete(Request $request, Produit $produit, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$produit->getId(), $request->getPayload()->get('_token'))) {

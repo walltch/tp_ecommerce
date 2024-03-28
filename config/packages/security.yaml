@@ -42,7 +42,7 @@ security:
     - { path: ^/admin, roles: ROLE_ADMIN }
     - { path: ^/user, roles: ROLE_ADMIN }
     - { path: ^/panier, roles: ROLE_ADMIN }
-    - { path: ^/produit, roles: ROLE_ADMIN }
+    - { path: ^/produit/new, roles: ROLE_ADMIN }
 
 when@test:
     security:

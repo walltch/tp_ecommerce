@@ -33,11 +33,13 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="7">no records found</td>
+                <td colspan="7">La page ne contient pas de produit.</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_produit_new') }}">Create new</a>
+    {% if is_granted('ROLE_ADMIN') %}
+        <a href="{{ path('app_produit_new') }}">Ajouter un produit.</a>
+    {% endif %}
 {% endblock %}
