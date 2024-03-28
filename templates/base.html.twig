@@ -12,6 +12,17 @@
         {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+        <style>
+        .nav{ display:flex; justify-content:space-around; }
+        </style>
+        <ul class="nav">
+            <li><a href="{{path('app_panier_index')}}">Panier</a></li>
+            <li><a href="{{path('app_produit_index')}}">Produit</a></li>
+            <li><a href="{{path('app_register')}}">Register</a></li>
+            <li><a href="{{path('app_contenu_panier_index')}}">Contenu Panier</a></li>
+            <li><a href="{{path('app_login')}}">Log in</a></li>
+        </ul>
+        {% block body %}
+        {% endblock %}
     </body>
 </html>
