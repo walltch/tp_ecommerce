@@ -36,7 +36,7 @@
                         <a href="{{ path('app_produit_edit', {'id': produit.id}) }}">Editer</a>
                     {% endif %}
                 </td>
-                 {% if not is_granted('ROLE_ADMIN') %}
+                {% if not is_granted('ROLE_ADMIN') %}
                     <form action="{{ path('app_contenu_panier_new', {'id': produit.id}) }}" method="POST">
                         <button type="submit" class="btn btn-success">Ajouter au Panier</button>
                     </form>
