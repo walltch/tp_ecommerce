@@ -23,34 +23,6 @@ class ContenuPanierController extends AbstractController
         ]);
     }
 
-    // #[Route('/new/{id}', name: 'app_contenu_panier_new', methods: ['GET','POST'])]
-    // public function new(Request $request, EntityManagerInterface $entityManager): Response
-    // {
-    //     $contenuPanier = new ContenuPanier();
-    //     $form = $this->createForm(ContenuPanierType::class, $contenuPanier);
-    //     $form->handleRequest($request);
-    //     dump("test  panier");
-    //     dump($contenuPanier);
-    //     dump($request->request->all());
-
-    //     if ($form->isSubmitted() && $form->isValid()) {
-    //         dump();
-           
-    //         // Ajouter le produit au panier
-    //         $contenuPanier->setQuantite($contenuPanier->getQuantite() + 1);
-    //         $entityManager->persist($contenuPanier);
-    //         $entityManager->flush();
-
-    //         // Rediriger l'utilisateur vers la page du contenu du panier
-    //         return $this->redirectToRoute('app_contenu_panier_index');
-    //     }
-
-    //     return $this->render('contenu_panier/new.html.twig', [
-    //         'contenu_panier' => $contenuPanier,
-    //         'form' => $form->createView(),
-    //     ]);
-    // }
-
     #[Route('/new/{id}', name: 'app_contenu_panier_new', methods: ['GET','POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager, int $id): Response
     {
