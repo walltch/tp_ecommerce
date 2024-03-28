@@ -38,7 +38,7 @@ class ProduitController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
              /** @var UploadedFile $imageFile */
-             $imageFile = $form->get('image')->getData();
+             $imageFile = $form->get('photo')->getData();
 
              // this condition is needed because the 'brochure' field is not required
              // so the PDF file must be processed only when a file is uploaded
@@ -54,7 +54,7 @@ class ProduitController extends AbstractController
                  } catch (FileException $e) {
                      // ... handle exception if something happens during file upload
                      $this->addFlash('danger', "Impossible d'uploader le fichier");
-                     return $this->redirectToRoute('app_product');
+                     return $this->redirectToRoute('app_produit_index');
                  }
  
                  // updates the 'imageFilename' property to store the PDF file name
@@ -66,7 +66,7 @@ class ProduitController extends AbstractController
             $entityManager->flush();
 
             $this->addFlash('success', 'Produit ajouté');
-            return $this->redirectToRoute('app_produit');
+            return $this->redirectToRoute('app_produit_index');
 
             return $this->redirectToRoute('app_produit_index', [], Response::HTTP_SEE_OTHER);
         }
