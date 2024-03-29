@@ -11,6 +11,9 @@
                 <th>Id</th>
                 <th>DateAchat</th>
                 <th>Etat</th>
+                {% if is_granted('ROLE_SUPER_ADMIN') %}
+                    <th>Nom client</th>
+                {% endif %}
                 <th>actions</th>
             </tr>
         </thead>
@@ -20,6 +23,9 @@
                 <td>{{ panier.id }}</td>
                 <td>{{ panier.dateAchat ? panier.dateAchat|date('Y-m-d') : '' }}</td>
                 <td>{{ panier.etat ? 'Yes' : 'No' }}</td>
+                {% if is_granted('ROLE_SUPER_ADMIN') %}
+                    <td>{{ panier.getUser.getNom }}</td>
+                {% endif %}
                 <td>
                     <a href="{{ path('app_panier_show', {'id': panier.id}) }}">Voir</a>
                     <a href="{{ path('app_panier_edit', {'id': panier.id}) }}">Editer</a>

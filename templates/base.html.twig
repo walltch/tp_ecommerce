@@ -37,7 +37,7 @@
               </a>
             </li>
             <li>
-            {% if is_granted('ROLE_USER') %}
+            {% if is_granted('ROLE_USER' , 'ROLE_SUPER_ADMIN') %}
              <a href="{{path('app_panier_index')}}" class="nav-link text-white">
                 <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#table"/></svg>
                 {{ 'base.cart'|trans}}

@@ -21,8 +21,10 @@ class Panier
     private ?bool $etat = null;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\YourEntity", mappedBy="user")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", mappedBy="user", inversedBy="panier")
+     * @ORM\JoinColumn(nullable=false)
      */
+
     private ?User $user = null;
     
 
