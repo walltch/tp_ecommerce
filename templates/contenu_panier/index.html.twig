@@ -19,6 +19,7 @@
             <tr>
                 <td>{{ contenu_panier.id }}</td>
                 <td>{{ contenu_panier.quantite }}</td>
+                <td>{{ contenu_panier.produit.id}}</td>
                 <td>{{ contenu_panier.date ? contenu_panier.date|date('Y-m-d') : '' }}</td>
                 <td>
                     <a href="{{ path('app_contenu_panier_show', {'id': contenu_panier.id}) }}">Voir</a>
@@ -33,5 +34,4 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_contenu_panier_new') }}">Create new</a>
 {% endblock %}

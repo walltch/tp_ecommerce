@@ -33,21 +33,21 @@
             <li>
               <a href="{{path('app_default')}}" class="nav-link text-white">
                 <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#home"/></svg>
-                À propos
+                Boutique
               </a>
             </li>
             <li>
             {% if is_granted('ROLE_USER') %}
-             <a href="{{path('app_default')}}" class="nav-link text-white">
+             <a href="{{path('app_panier_index')}}" class="nav-link text-white">
                 <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#table"/></svg>
-                Mes commandes
+                Mes commandes / Panier
               </a>
             {% endif %}
             </li>
             <li>
-              <a href="{{path('app_panier_new')}}" class="nav-link text-white">
+              <a href="{{path('app_contenu_panier_index')}}" class="nav-link text-white">
                 <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#grid"/></svg>
-                Panier
+                Contenu Panier
               </a>
             </li>
             <li>
