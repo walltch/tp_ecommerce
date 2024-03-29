@@ -5,3 +5,18 @@ login:
   password: Mot de passe
   remember-me: Se souvenir de moi
   sign-in: Se connecter
+
+base:
+  home: Accueil
+  shop: Boutique
+  cart: Mes commandes / Panier
+  cart-contents: Contenu Panier
+  contact: Nous contacter
+  sign-up: S'inscrire
+  log-as: Vous êtes connecté en tant que
+  log-out: Déconnexion
+
+default:
+  info: Plus d'infos
+  add: Ajouter au panier
+  in-stock: en stock
