@@ -7,10 +7,11 @@ use App\Entity\Produit;
 use App\Form\ContenuPanierType;
 use App\Repository\ContenuPanierRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Attribute\Route;
 
 #[Route('/contenu/panier')]
@@ -24,39 +25,6 @@ class ContenuPanierController extends AbstractController
         ]);
     }
 
-    // #[Route('/new/{id}', name: 'app_contenu_panier_new', methods: ['GET','POST'])]
-    // public function new(Request $request, EntityManagerInterface $entityManager, int $id, LoggerInterface $l): Response
-    // {
-    //     $l->error('1');
-    //     // Récupérer le produit associé à l'identifiant
-    //     $produit = $entityManager->getRepository(Produit::class)->findOneById($id);
-    
-    //     // Créer une nouvelle instance de ContenuPanier
-    //     $contenuPanier = new ContenuPanier();
-    //     // Assurez-vous d'associer le produit récupéré à l'entité ContenuPanier
-    //     $contenuPanier->setProduit($produit);
-    //     $contenuPanier->setDate(new \DateTime());
-    
-    //     // Créer le formulaire en passant l'entité ContenuPanier
-    //     $form = $this->createForm(ContenuPanierType::class, $contenuPanier);
-    //     $form->handleRequest($request);
-    //     $l->error('2');
-    //     // if ($form->isSubmitted() && $form->isValid()) {
-    //         $l->error('3');
-    //         // Ajouter le produit au panier
-    //         $contenuPanier->setQuantite($contenuPanier->getQuantite() + 1);
-    //         $entityManager->persist($contenuPanier);
-    //         $entityManager->flush();
-    
-    //         // Rediriger l'utilisateur vers la page du contenu du panier
-    //         return $this->redirectToRoute('app_contenu_panier_index');
-    //     // }
-    
-    //     // return $this->render('contenu_panier/new.html.twig', [
-    //     //     'contenu_panier' => $contenuPanier,
-    //     //     'form' => $form->createView(),
-    //     // ]);
-    // }
     #[Route('/new/{id}', name: 'app_contenu_panier_new', methods: ['POST'])]
     public function new(int $id, EntityManagerInterface $entityManager): Response
     {
@@ -87,8 +55,18 @@ class ContenuPanierController extends AbstractController
 
 
     #[Route('/{id}', name: 'app_contenu_panier_show', methods: ['GET'])]
-    public function show(ContenuPanier $contenuPanier): Response
+    public function show(SessionInterface $session,Security $security,ContenuPanier $contenuPanier): Response
     {
+        if ($security->getUser()) {
+            // Rediriger vers le panier s'il est connecté
+            $session->set('session', $contenuPanier);
+            return $this->redirectToRoute('app_panier_new');
+        } else {
+            $session->set('previous_page', $this->generateUrl('app_contenu_panier_show'));
+            // Rediriger vers la page de connexion sinon
+            $session->set('session', $contenuPanier);
+            return $this->redirectToRoute('app_login');
+        }
         return $this->render('contenu_panier/show.html.twig', [
             'contenu_panier' => $contenuPanier,
         ]);

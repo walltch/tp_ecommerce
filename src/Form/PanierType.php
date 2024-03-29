@@ -6,6 +6,7 @@ use App\Entity\Panier;
 use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -14,9 +15,10 @@ class PanierType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('dateAchat', null, [
-                'widget' => 'single_text'
-            ])
+        ->add('dateAchat', DateTimeType::class, [
+            
+            'data' => new \DateTime(), // Définir une valeur par défaut si nécessaire
+        ])
             ->add('etat')
             ->add('user', EntityType::class, [
                 'class' => User::class,

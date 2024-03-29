@@ -20,6 +20,13 @@ class Panier
     #[ORM\Column]
     private ?bool $etat = null;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\YourEntity", mappedBy="user")
+     */
+    private ?User $user = null;
+    
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -48,4 +55,18 @@ class Panier
 
         return $this;
     }
+
+    public function getUser(): ?string
+    {
+        return $this->user;
+    }
+
+    // Correction de la méthode setUser dans la classe Panier
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
 }
