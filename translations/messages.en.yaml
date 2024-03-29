@@ -20,3 +20,23 @@ default:
   info: More info
   add: Add to cart
   in-stock: in stock
+  no-product: The page does not contain a product.
+  right-now: Right now
+
+edit-account: Edit my account
+edit: Edit
+view: View
+name: Name
+firt-name: First name
+back: Back
+price: Price
+cart-index: Cart index
+product: Product
+product-index: Product index
+cart-contents-index: Cart contents index
+validate: Validate
+back-to-list: Back to list
+add-product: Add Product
+user: User
+user-not-found: User not found
+new-user: New user

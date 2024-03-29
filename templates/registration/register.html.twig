@@ -1,8 +1,8 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Inscrivez-vous{% endblock %}
+{% block title %}{{'register'|trans}}{% endblock %}
 
 {% block body %}
-    <h1>Inscrivez-vous</h1>
+    <h1>{{'register'|trans}}</h1>
 {{ form(registrationForm) }}
 {% endblock %}

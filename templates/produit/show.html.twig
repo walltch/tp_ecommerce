@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Produit{% endblock %}
+{% block title %}{{'product'|trans}}{% endblock %}
 
 {% block body %}
-    <h1>Produit</h1>
+    <h1>{{'product'|trans}}</h1>
 
                 <div class="col">
                   <div class="card shadow-sm" style= "height: 450px";>
@@ -15,13 +15,13 @@
                     <div class="card-body" style="display:flex; flex-direction:column; justify-content: space-between;">
                     <div class="d-flex justify-content-between">
                       <p class="card-text">{{ produit.nom}}</p>
-                      <p class="text-body-secondary">{{ produit.stock }} en stock</p>
+                      <p class="text-body-secondary">{{ produit.stock }} {{'default.in-stock'|trans}}</p>
                     </div>
                       <p class="card-text">{{ produit.description }}</p>
                       <div class="d-flex justify-content-between align-items-center">
-                          <a href="{{ path('app_produit_show', {'id': produit.id}) }}" class="btn btn-secondary">Plus d'info</a>
+                          <a href="{{ path('app_produit_show', {'id': produit.id}) }}" class="btn btn-secondary">{{'default.info'|trans}}</a>
                           <form action="{{ path('app_contenu_panier_new', {'id': produit.id}) }}" method="POST">
-                            <button type="submit" class="btn btn-success">Ajouter au Panier</button>
+                            <button type="submit" class="btn btn-success">{{'default.add'|trans}}</button>
                           </form>
                       </div>
                     </div>
@@ -34,7 +34,7 @@
                 <td>{{ produit.id }}</td>
             </tr>
             <tr>
-                <th>Nom</th>
+                <th>{{'name'|trans}}</th>
                 <td>{{ produit.nom }}</td>
             </tr>
             <tr>
@@ -42,7 +42,7 @@
                 <td>{{ produit.description }}</td>
             </tr>
             <tr>
-                <th>Prix</th>
+                <th>{{'price'|trans}}</th>
                 <td>{{ produit.prix }}</td>
             </tr>
             <tr>
@@ -55,15 +55,15 @@
             </tr>
         </tbody>
     </table>
-    <a href="{{ path('app_produit_index') }}">Retour</a>
+    <a href="{{ path('app_produit_index') }}">{{'back'|trans}}</a>
 
     {% if is_granted('ROLE_ADMIN' OR 'ROLE_SUPER_ADMIN') %}
-        <a href="{{ path('app_produit_edit', {'id': produit.id}) }}">Editer</a>
+        <a href="{{ path('app_produit_edit', {'id': produit.id}) }}">{{'edit'|trans}}</a>
         {{ include('produit/_delete_form.html.twig') }}
     {% endif %}
     {% if not is_granted('ROLE_ADMIN' OR 'ROLE_SUPER_ADMIN') %}
         <form action="{{ path('app_contenu_panier_new', {'id': produit.id}) }}" method="POST">
-            <button type="submit" class="btn btn-success">Ajouter au Panier</button>
+            <button type="submit" class="btn btn-success">{{'default.add'|trans}}</button>
         </form>
     {% endif %}
 {% endblock %}

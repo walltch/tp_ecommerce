@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Panier index{% endblock %}
+{% block title %}{{'cart-index'|trans}}{% endblock %}
 
 {% block body %}
-    <h1>Panier index</h1>
+    <h1>{{'cart-index'|trans}}</h1>
 
     <table class="table">
         <thead>
@@ -27,8 +27,8 @@
                     <td>{{ panier.getUser.getNom }}</td>
                 {% endif %}
                 <td>
-                    <a href="{{ path('app_panier_show', {'id': panier.id}) }}">Voir</a>
-                    <a href="{{ path('app_panier_edit', {'id': panier.id}) }}">Editer</a>
+                    <a href="{{ path('app_panier_show', {'id': panier.id}) }}">{{'view'|trans}}</a>
+                    <a href="{{ path('app_panier_edit', {'id': panier.id}) }}">{{'edit'|trans}}</a>
                 </td>
             </tr>
         {% else %}
