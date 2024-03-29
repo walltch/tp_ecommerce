@@ -5,10 +5,12 @@ namespace App\Controller;
 use App\Entity\Panier;
 use App\Form\PanierType;
 use App\Repository\PanierRepository;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Attribute\Route;
 
 #[Route('/panier')]
@@ -35,6 +37,11 @@ class PanierController extends AbstractController
 
             return $this->redirectToRoute('app_panier_index', [], Response::HTTP_SEE_OTHER);
         }
+        $dateAchat = new DateTime(); 
+        $dateAchatString = $dateAchat; 
+
+        $panier->setDateAchat($dateAchatString);        
+        $panier->setUser($this->getUser());
 
         return $this->render('panier/new.html.twig', [
             'panier' => $panier,
@@ -51,7 +58,7 @@ class PanierController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_panier_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Panier $panier, EntityManagerInterface $entityManager): Response
+    public function edit(Request $request,Session $session, Panier $panier, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(PanierType::class, $panier);
         $form->handleRequest($request);
@@ -59,8 +66,8 @@ class PanierController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_panier_index', [], Response::HTTP_SEE_OTHER);
-        }
+            return $this->redirectToRoute('/', [], Response::HTTP_SEE_OTHER);
+        }        
 
         return $this->render('panier/edit.html.twig', [
             'panier' => $panier,
