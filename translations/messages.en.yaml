@@ -5,3 +5,18 @@ login:
   password: Password
   remember-me: Remember me
   sign-in: Sign in
+
+base:
+  home: Home
+  shop: Shop
+  cart: Cart
+  cart-contents: Cart contents
+  contact: Contact us
+  sign-up: Sign up
+  log-as: You are logged as
+  log-out: Log out
+
+default:
+  info: More info
+  add: Add to cart
+  in-stock: in stock

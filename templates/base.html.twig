@@ -27,33 +27,33 @@
             <li>
               <a href="{{path('app_default')}}" class="nav-link text-white">
                 <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href=""/></svg>
-                Accueil
+                {{ 'base.home'|trans}}
               </a>
             </li>
             <li>
               <a href="{{path('app_default')}}" class="nav-link text-white">
                 <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#home"/></svg>
-                Boutique
+                {{ 'base.shop'|trans}}
               </a>
             </li>
             <li>
             {% if is_granted('ROLE_USER') %}
              <a href="{{path('app_panier_index')}}" class="nav-link text-white">
                 <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#table"/></svg>
-                Mes commandes / Panier
+                {{ 'base.cart'|trans}}
               </a>
             {% endif %}
             </li>
             <li>
               <a href="{{path('app_contenu_panier_index')}}" class="nav-link text-white">
                 <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#grid"/></svg>
-                Contenu Panier
+                {{ 'base.cart-contents'|trans}}
               </a>
             </li>
             <li>
               <a href="{{path('app_default')}}" class="nav-link text-white">
                 <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#people-circle"/></svg>
-                Nous contacter
+                {{ 'base.contact'|trans}}
               </a>
             </li>
           </ul>
@@ -67,13 +67,13 @@
         </form>
         {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
             <div class="text-end">
-            <a href="{{path('app_register')}}" class="btn btn-light text-dark me-2">S'inscrire</a>
-            <a href="{{path('app_login')}}" class="btn btn-primary">Se connecter</a>
+            <a href="{{path('app_register')}}" class="btn btn-light text-dark me-2">{{ 'base.sign-up'|trans}}</a>
+            <a href="{{path('app_login')}}" class="btn btn-primary">{{ 'login.sign-in'|trans}}</a>
             </div>
         {% endif %}
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
             <div class="mb-3">
-                Vous êtes connecté en tant que: {{ app.user.userIdentifier }} : <a href="{{ path('app_logout') }}">Déconnexion</a>
+                {{ 'base.log-as'|trans}}: {{ app.user.userIdentifier }} : <a href="{{ path('app_logout') }}">{{ 'base.log-out'|trans}}</a>
             </div>
         {% endif %}  
       </div>
