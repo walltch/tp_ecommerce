@@ -20,3 +20,23 @@ default:
   info: Plus d'infos
   add: Ajouter au panier
   in-stock: en stock
+  no-product: La page ne contient pas de produit.
+  right-now: En ce moment
+
+edit-account: Editer mon compte
+edit: Editer
+view: Voir
+name: Nom
+firt-name: Prénom
+back: Retour
+price: Prix
+cart-index: Panier index
+product: Produit
+product-index: Produit index
+cart-contents-index: Contenu Panier index
+validate: Valider
+back-to-list: Retour à la liste des produits
+add-product: Ajouter un produit
+user: Utilisateur
+user-not-found: Utilisateur non trouvé
+new-user: Nouvel utilisateur

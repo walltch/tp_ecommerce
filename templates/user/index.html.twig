@@ -11,9 +11,9 @@
                 <th>Id</th>
                 <th>Email</th>
                 <th>Roles</th>
-                <th>Password</th>
-                <th>Nom</th>
-                <th>Prenom</th>
+                <th>{{'login.password'|trans}}</th>
+                <th>{{'name'|trans}}</th>
+                <th>{{'first-name'|trans}}</th>
                 <th>Role</th>
                 <th>actions</th>
             </tr>
@@ -29,17 +29,17 @@
                 <td>{{ user.prenom }}</td>
                 <td>{{ user.role }}</td>
                 <td>
-                    <a href="{{ path('app_user_show', {'id': user.id}) }}">Voir</a>
-                    <a href="{{ path('app_user_edit', {'id': user.id}) }}">Editer</a>
+                    <a href="{{ path('app_user_show', {'id': user.id}) }}">{{'view'|trans}}</a>
+                    <a href="{{ path('app_user_edit', {'id': user.id}) }}">{{'edit'|trans}}</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="8">Utilisateurs non trouvé.</td>
+                <td colspan="8">{{'user-not-found'|trans}}</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_user_new') }}">Nouvel utilisateur</a>
+    <a href="{{ path('app_user_new') }}">{{'new-user'|trans}}</a>
 {% endblock %}

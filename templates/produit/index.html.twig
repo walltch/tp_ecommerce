@@ -1,17 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Produit index{% endblock %}
+{% block title %}{{'product-index'|trans}}{% endblock %}
 
 {% block body %}
-    <h1>Produit index</h1>
+    <h1>{{'product-index'|trans}}</h1>
 
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Nom</th>
+                <th>{{'name'|trans}}</th>
                 <th>Description</th>
-                <th>Prix</th>
+                <th>{{'price'|trans}}</th>
                 <th>Stock</th>
                 <th>Photo</th>
                 <th>actions</th>
@@ -31,20 +31,20 @@
                     {% endif %}
                 </td>
                 <td>
-                    <a href="{{ path('app_produit_show', {'id': produit.id}) }}" class="btn btn-primary">Voir</a>
+                    <a href="{{ path('app_produit_show', {'id': produit.id}) }}" class="btn btn-primary">{{'view'|trans}}</a>
                     {% if is_granted('ROLE_ADMIN' OR 'ROLE_SUPER_ADMIN') %}
-                        <a href="{{ path('app_produit_edit', {'id': produit.id}) }}">Editer</a>
+                        <a href="{{ path('app_produit_edit', {'id': produit.id}) }}">{{'edit'|trans}}</a>
                     {% endif %}
                 {% if not is_granted('ROLE_ADMIN' OR 'ROLE_SUPER_ADMIN') %}
                     <form action="{{ path('app_contenu_panier_new', {'id': produit.id}) }}" method="POST">
-                        <button type="submit" class="btn btn-success">Ajouter au Panier</button>
+                        <button type="submit" class="btn btn-success">{{'default.add'|trans}}</button>
                     </form>
                 {% endif %}
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="7">La page ne contient pas de produit.</td>
+                <td colspan="7">{{'default.no-product'|trans}}</td>
             </tr>
         {% endfor %}
         </tbody>
@@ -52,7 +52,7 @@
 </div>
 
 {% if is_granted('ROLE_ADMIN' OR 'ROLE_SUPER_ADMIN') %}
-    <a href="{{ path('app_produit_new') }}" class="btn btn-primary">Ajouter un produit</a>
+    <a href="{{ path('app_produit_new') }}" class="btn btn-primary">{{'add-product'|trans}}</a>
 {% endif %}
 
 {% endblock %}
