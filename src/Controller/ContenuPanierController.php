@@ -24,38 +24,65 @@ class ContenuPanierController extends AbstractController
         ]);
     }
 
-    #[Route('/new/{id}', name: 'app_contenu_panier_new', methods: ['GET','POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager, int $id, LoggerInterface $l): Response
+    // #[Route('/new/{id}', name: 'app_contenu_panier_new', methods: ['GET','POST'])]
+    // public function new(Request $request, EntityManagerInterface $entityManager, int $id, LoggerInterface $l): Response
+    // {
+    //     $l->error('1');
+    //     // Récupérer le produit associé à l'identifiant
+    //     $produit = $entityManager->getRepository(Produit::class)->findOneById($id);
+    
+    //     // Créer une nouvelle instance de ContenuPanier
+    //     $contenuPanier = new ContenuPanier();
+    //     // Assurez-vous d'associer le produit récupéré à l'entité ContenuPanier
+    //     $contenuPanier->setProduit($produit);
+    //     $contenuPanier->setDate(new \DateTime());
+    
+    //     // Créer le formulaire en passant l'entité ContenuPanier
+    //     $form = $this->createForm(ContenuPanierType::class, $contenuPanier);
+    //     $form->handleRequest($request);
+    //     $l->error('2');
+    //     // if ($form->isSubmitted() && $form->isValid()) {
+    //         $l->error('3');
+    //         // Ajouter le produit au panier
+    //         $contenuPanier->setQuantite($contenuPanier->getQuantite() + 1);
+    //         $entityManager->persist($contenuPanier);
+    //         $entityManager->flush();
+    
+    //         // Rediriger l'utilisateur vers la page du contenu du panier
+    //         return $this->redirectToRoute('app_contenu_panier_index');
+    //     // }
+    
+    //     // return $this->render('contenu_panier/new.html.twig', [
+    //     //     'contenu_panier' => $contenuPanier,
+    //     //     'form' => $form->createView(),
+    //     // ]);
+    // }
+    #[Route('/new/{id}', name: 'app_contenu_panier_new', methods: ['POST'])]
+    public function new(int $id, EntityManagerInterface $entityManager): Response
     {
-        $l->error('1');
         // Récupérer le produit associé à l'identifiant
-        $produit = $entityManager->getRepository(Produit::class)->findOneById($id);
-    
-        // Créer une nouvelle instance de ContenuPanier
-        $contenuPanier = new ContenuPanier();
-        // Assurez-vous d'associer le produit récupéré à l'entité ContenuPanier
-        $contenuPanier->setProduit($produit);
-        $contenuPanier->setDate(new \DateTime());
-    
-        // Créer le formulaire en passant l'entité ContenuPanier
-        $form = $this->createForm(ContenuPanierType::class, $contenuPanier);
-        $form->handleRequest($request);
-        $l->error('2');
-        // if ($form->isSubmitted() && $form->isValid()) {
-            $l->error('3');
-            // Ajouter le produit au panier
+        $produit = $entityManager->getRepository(Produit::class)->find($id);
+
+        // Vérifier si le produit existe déjà dans le panier
+        $contenuPanier = $entityManager->getRepository(ContenuPanier::class)->findOneBy(['produit' => $produit]);
+
+        if ($contenuPanier) {
+            // Si le produit existe déjà, augmenter la quantité
             $contenuPanier->setQuantite($contenuPanier->getQuantite() + 1);
+        } else {
+            // Si le produit n'existe pas, créer un nouvel élément
+            $contenuPanier = new ContenuPanier();
+            $contenuPanier->setProduit($produit);
+            $contenuPanier->setQuantite(1);
+            $contenuPanier->setDate(new \DateTime());
+
             $entityManager->persist($contenuPanier);
-            $entityManager->flush();
-    
-            // Rediriger l'utilisateur vers la page du contenu du panier
-            return $this->redirectToRoute('app_contenu_panier_index');
-        // }
-    
-        // return $this->render('contenu_panier/new.html.twig', [
-        //     'contenu_panier' => $contenuPanier,
-        //     'form' => $form->createView(),
-        // ]);
+        }
+
+        $entityManager->flush();
+
+        // Rediriger l'utilisateur vers la page du contenu du panier
+        return $this->redirectToRoute('app_contenu_panier_index');
     }
 
 
