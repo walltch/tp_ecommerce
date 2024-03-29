@@ -19,6 +19,12 @@
                 <th>Etat</th>
                 <td>{{ panier.etat ? 'Yes' : 'No' }}</td>
             </tr>
+            {% if is_granted('ROLE_SUPER_ADMIN') %}
+                <tr>
+                    <th>Nom client</th>
+                    <td>{{ panier.getUser.nom }}</td>
+                </tr>
+            {% endif %}
         </tbody>
     </table>
 
