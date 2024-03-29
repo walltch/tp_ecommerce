@@ -5,6 +5,28 @@
 {% block body %}
     <h1>Produit</h1>
 
+                <div class="col">
+                  <div class="card shadow-sm" style= "height: 450px";>
+                    <div class="card-body-img" style= "width:100%; height: 255px";>
+                        {% if produit.photo is not null %}
+                            <img src="{{ asset('uploads/'~ produit.photo) }}" style= "width:100%; height:100%; object-fit:cover">
+                        {% endif %}
+                    </div>
+                    <div class="card-body" style="display:flex; flex-direction:column; justify-content: space-between;">
+                    <div class="d-flex justify-content-between">
+                      <p class="card-text">{{ produit.nom}}</p>
+                      <p class="text-body-secondary">{{ produit.stock }} en stock</p>
+                    </div>
+                      <p class="card-text">{{ produit.description }}</p>
+                      <div class="d-flex justify-content-between align-items-center">
+                          <a href="{{ path('app_produit_show', {'id': produit.id}) }}" class="btn btn-secondary">Plus d'info</a>
+                          <form action="{{ path('app_contenu_panier_new', {'id': produit.id}) }}" method="POST">
+                            <button type="submit" class="btn btn-success">Ajouter au Panier</button>
+                          </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
     <table class="table">
         <tbody>
             <tr>

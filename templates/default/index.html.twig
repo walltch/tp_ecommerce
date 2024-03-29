@@ -2,20 +2,17 @@
 {% block body %}
 
 <main>
-    <section class="py-5 text-center container bg-body-tertiary">
-        <div class="row py-lg-5">
+    <section class="py-5 text-center container bg-body" style="position:relative">
+        <div class="row py-lg-5 relative" style="z-index:10; position:relative">
         <div class="col-lg-6 col-md-8 mx-auto">
-            <h1 class="fw-light">Album example</h1>
+            <h1 class="fw-light">La Croûte Dorée</h1>
             <p class="lead text-body-secondary">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
-            <p>
-            <a href="#" class="btn btn-primary my-2">Main call to action</a>
-            <a href="#" class="btn btn-secondary my-2">Secondary action</a>
-            </p>
         </div>
         </div>
+         <img src="{{asset('img/landing.jpeg')}}" alt="landing" style="width:100%; height: 100%; object-fit:cover; position: absolute; top:0; right:0">
     </section>
-  <div class="album py-5 bg-body-tertiary">
-  <h2 class="fw-light">Album example</h2>
+  <div class="album py-5 bg-body-tertiary container">
+  <h2 class="fw-light py-3 text-center">En ce moment</h2>
     <div class="container">
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
         {% for produit in produits %}
@@ -26,17 +23,17 @@
                             <img src="{{ asset('uploads/'~ produit.photo) }}" style= "width:100%; height:100%; object-fit:cover">
                         {% endif %}
                     </div>
-                    <div class="card-body">
-                    <p class="card-text">{{ produit.nom}}</p>
+                    <div class="card-body" style="display:flex; flex-direction:column; justify-content: space-between;">
+                    <div class="d-flex justify-content-between">
+                      <p class="card-text">{{ produit.nom}}</p>
+                      <p class="text-body-secondary">{{ produit.stock }} en stock</p>
+                    </div>
                       <p class="card-text">{{ produit.description }}</p>
                       <div class="d-flex justify-content-between align-items-center">
-                        <div class="btn-group">
+                          <a href="{{ path('app_produit_show', {'id': produit.id}) }}" class="btn btn-secondary">Plus d'info</a>
                           <form action="{{ path('app_contenu_panier_new', {'id': produit.id}) }}" method="POST">
-                            <button type="submit" class="btn btn-success">{{ 'default.info'|trans}}</button>
-                            <button type="submit" class="btn btn-success">{{ 'default.add'|trans}}</button>
+                            <button type="submit" class="btn btn-success">Ajouter au Panier</button>
                           </form>
-                        </div>
-                        <small class="text-body-secondary">{{ produit.stock }} {{ 'default.in-stock'|trans}}</small>
                       </div>
                     </div>
                   </div>
@@ -44,9 +41,9 @@
         {% else %}
             <p colspan="7">La page ne contient pas de produit.</p>
         {% endfor %}
-              </div>
-            </div>
-          </div>
+        </div>
+      </div>
+    </div>
 </main>
 {% endblock %}
                 {# </td>
