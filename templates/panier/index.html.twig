@@ -3,18 +3,14 @@
 {% block title %}{{'cart-index'|trans}}{% endblock %}
 
 {% block body %}
-    <h1>{{'cart-index'|trans}}</h1>
-
-    <table class="table">
+    <h1 class="container">{{'cart-index'|trans}}</h1>
+    <table class="table container">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>DateAchat</th>
+                <th>Date Achat</th>
                 <th>Etat</th>
-                {% if is_granted('ROLE_SUPER_ADMIN') %}
-                    <th>Nom client</th>
-                {% endif %}
-                <th>actions</th>
+                <th>Actions</th>  
             </tr>
         </thead>
         <tbody>
@@ -22,13 +18,9 @@
             <tr>
                 <td>{{ panier.id }}</td>
                 <td>{{ panier.dateAchat ? panier.dateAchat|date('Y-m-d') : '' }}</td>
-                <td>{{ panier.etat ? 'Yes' : 'No' }}</td>
-                {% if is_granted('ROLE_SUPER_ADMIN') %}
-                    <td>{{ panier.getUser.getNom }}</td>
-                {% endif %}
+                <td>{{ panier.etat ? 'Payé' : 'Non-Payé' }}</td>
                 <td>
-                    <a href="{{ path('app_panier_show', {'id': panier.id}) }}">{{'view'|trans}}</a>
-                    <a href="{{ path('app_panier_edit', {'id': panier.id}) }}">{{'edit'|trans}}</a>
+                    <a href="{{ path('app_contenu_panier_index', {'id': panier.id}) }}">{{'show'|trans}}</a>
                 </td>
             </tr>
         {% else %}
@@ -38,6 +30,4 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('app_panier_new') }}">Create new</a>
 {% endblock %}

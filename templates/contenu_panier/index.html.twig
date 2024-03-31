@@ -38,7 +38,7 @@
     </table>
     <div class=" container text-center">
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-            <a href="{{ path('app_panier_index') }}" class="btn btn-primary">{{'buy'|trans}} {{ totalCost }} € </a>
+            <a href="{{ path('app_panier_new') }}" class="btn btn-primary">{{'buy'|trans}} {{ totalCost }} € </a>
         {% else %}
             <a href="{{ path('app_login') }}" class="btn btn-primary">{{'sign-in'|trans}}</a>
         {% endif %}
