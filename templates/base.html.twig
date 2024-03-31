@@ -37,7 +37,7 @@
               </a>
             </li>
             <li>
-            {% if is_granted('ROLE_USER') or is_granted('ROLE_SUPER_ADMIN') %}
+            {% if not is_granted('ROLE_ADMIN') %}
              <a href="{{path('app_panier_index')}}" class="nav-link text-white">
                 <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#table"/></svg>
                 {{ 'base.cart'|trans}}
@@ -45,10 +45,12 @@
             {% endif %}
             </li>
             <li>
+            {% if not is_granted('ROLE_ADMIN') %}
               <a href="{{path('app_contenu_panier_index')}}" class="nav-link text-white">
                 <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#grid"/></svg>
                 {{ 'base.cart-contents'|trans}}
               </a>
+            {% endif %}
             </li>
             <li>
               <a href="{{path('app_default')}}" class="nav-link text-white">
@@ -61,6 +63,14 @@
                     <a href="{{path('app_produit_new')}}" class="nav-link text-white">
                     <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#people-circle"/></svg>
                     {{ 'base.add-product'|trans}}
+                    </a>
+                </li>
+            {% endif %}
+            {% if is_granted('ROLE_SUPER_ADMIN')%}
+                <li>
+                    <a href="{{path('app_user_index')}}" class="nav-link text-white">
+                    <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#people-circle"/></svg>
+                    Dashbord
                     </a>
                 </li>
             {% endif %}
@@ -81,7 +91,8 @@
         {% endif %}
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
             <div class="mb-3">
-                {{ 'base.log-as'|trans}}: {{ app.user.userIdentifier }} : <a href="{{ path('app_logout') }}">{{ 'base.log-out'|trans}}</a>
+                <a class="btn btn-primary" href="{{ path('app_user_index') }}">{{ 'base.my-account'|trans }}</a>
+                <a class =" btn btn-secondary" href="{{ path('app_logout') }}">{{ 'base.log-out'|trans}}</a>
             </div>
         {% endif %}
       </div>

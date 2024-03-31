@@ -44,6 +44,7 @@ class ContenuPanierController extends AbstractController
             $contenuPanier->setQuantite(1);
             $contenuPanier->setDate(new \DateTime());
             $entityManager->persist($contenuPanier);
+            $contenuPanier->setUserId($this->getUser());
         }
 
         $entityManager->flush();
