@@ -4,15 +4,15 @@
 <main>
     <section class="py-5 text-center container bg-body" style="position:relative">
         <div class="row py-lg-5 relative" style="z-index:10; position:relative">
-        <div class="col-lg-6 col-md-8 mx-auto">
-            <h1 class="fw-light">La Croûte Dorée</h1>
-            <p class="lead text-body-secondary">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
+        <div class="col-lg-6 col-md-8 mx-auto" style="background-color: rgba(0,0,0,0.5)">
+            <h1 class="fw-light text-white">La Croûte Dorée</h1>
+            <p class="lead text-white">{{'open'|trans}}<br>{{'open-time'|trans}}</p>
         </div>
         </div>
          <img src="{{asset('img/landing.jpeg')}}" alt="landing" style="width:100%; height: 100%; object-fit:cover; position: absolute; top:0; right:0">
     </section>
   <div class="album py-5 bg-body-tertiary container">
-  <h2 class="fw-light py-3 text-center">{{'default.right-now'|trans}}</h2>
+  <h2 class="fw-light py-3 text-center">{{'default.our-products'|trans}}</h2>
     <div class="container">
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
         {% for produit in produits %}
@@ -31,9 +31,14 @@
                       <p class="card-text">{{ produit.description }}</p>
                       <div class="d-flex justify-content-between align-items-center">
                           <a href="{{ path('app_produit_show', {'id': produit.id}) }}" class="btn btn-secondary">{{'default.info'|trans}}</a>
+                        {%if is_granted('ROLE_USER') and not is_granted('ROLE_ADMIN') %}
                           <form action="{{ path('app_contenu_panier_new', {'id': produit.id}) }}" method="POST">
                             <button type="submit" class="btn btn-success">{{'default.add'|trans}}</button>
                           </form>
+                        {% endif %}
+                        {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_SUPER_ADMIN') %}
+                          <a  class="btn btn-warning" href="{{ path('app_produit_edit', {'id': produit.id}) }}">{{'edit'|trans}}</a>
+                        {% endif %}
                       </div>
                     </div>
                   </div>
@@ -46,7 +51,3 @@
     </div>
 </main>
 {% endblock %}
-                {# </td>
-                <td>
-                    <a href="" class="btn btn-success">Plus d'info</a>
-  #}

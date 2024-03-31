@@ -37,7 +37,7 @@
               </a>
             </li>
             <li>
-            {% if is_granted('ROLE_USER' , 'ROLE_SUPER_ADMIN') %}
+            {% if is_granted('ROLE_USER') or is_granted('ROLE_SUPER_ADMIN') %}
              <a href="{{path('app_panier_index')}}" class="nav-link text-white">
                 <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#table"/></svg>
                 {{ 'base.cart'|trans}}
@@ -56,6 +56,14 @@
                 {{ 'base.contact'|trans}}
               </a>
             </li>
+            {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_SUPER_ADMIN') %}
+                <li>
+                    <a href="{{path('app_produit_new')}}" class="nav-link text-white">
+                    <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#people-circle"/></svg>
+                    {{ 'base.add-product'|trans}}
+                    </a>
+                </li>
+            {% endif %}
           </ul>
         </div>
       </div>
@@ -75,7 +83,7 @@
             <div class="mb-3">
                 {{ 'base.log-as'|trans}}: {{ app.user.userIdentifier }} : <a href="{{ path('app_logout') }}">{{ 'base.log-out'|trans}}</a>
             </div>
-        {% endif %}  
+        {% endif %}
       </div>
     </div>
   </header>

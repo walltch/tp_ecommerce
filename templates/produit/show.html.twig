@@ -3,67 +3,33 @@
 {% block title %}{{'product'|trans}}{% endblock %}
 
 {% block body %}
-    <h1>{{'product'|trans}}</h1>
-
-                <div class="col">
-                  <div class="card shadow-sm" style= "height: 450px";>
-                    <div class="card-body-img" style= "width:100%; height: 255px";>
-                        {% if produit.photo is not null %}
-                            <img src="{{ asset('uploads/'~ produit.photo) }}" style= "width:100%; height:100%; object-fit:cover">
-                        {% endif %}
-                    </div>
-                    <div class="card-body" style="display:flex; flex-direction:column; justify-content: space-between;">
-                    <div class="d-flex justify-content-between">
-                      <p class="card-text">{{ produit.nom}}</p>
-                      <p class="text-body-secondary">{{ produit.stock }} {{'default.in-stock'|trans}}</p>
-                    </div>
-                      <p class="card-text">{{ produit.description }}</p>
-                      <div class="d-flex justify-content-between align-items-center">
-                          <a href="{{ path('app_produit_show', {'id': produit.id}) }}" class="btn btn-secondary">{{'default.info'|trans}}</a>
-                          <form action="{{ path('app_contenu_panier_new', {'id': produit.id}) }}" method="POST">
-                            <button type="submit" class="btn btn-success">{{'default.add'|trans}}</button>
-                          </form>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ produit.id }}</td>
-            </tr>
-            <tr>
-                <th>{{'name'|trans}}</th>
-                <td>{{ produit.nom }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ produit.description }}</td>
-            </tr>
-            <tr>
-                <th>{{'price'|trans}}</th>
-                <td>{{ produit.prix }}</td>
-            </tr>
-            <tr>
-                <th>Stock</th>
-                <td>{{ produit.stock }}</td>
-            </tr>
-            <tr>
-                <th>Photo</th>
-                <td>{{ produit.photo }}</td>
-            </tr>
-        </tbody>
-    </table>
-    <a href="{{ path('app_produit_index') }}">{{'back'|trans}}</a>
-
-    {% if is_granted('ROLE_ADMIN' OR 'ROLE_SUPER_ADMIN') %}
-        <a href="{{ path('app_produit_edit', {'id': produit.id}) }}">{{'edit'|trans}}</a>
-        {{ include('produit/_delete_form.html.twig') }}
-    {% endif %}
-    {% if not is_granted('ROLE_ADMIN' OR 'ROLE_SUPER_ADMIN') %}
-        <form action="{{ path('app_contenu_panier_new', {'id': produit.id}) }}" method="POST">
-            <button type="submit" class="btn btn-success">{{'default.add'|trans}}</button>
-        </form>
-    {% endif %}
+    <div class="container">
+    <div class="row align-items-md-stretch">
+      <div class="col-md-6">
+        <div class="h-100  text-bg-dark rounded-3 object-fit-cover">
+            {% if produit.photo is not null %}
+                <img src="{{ asset('uploads/'~ produit.photo) }}" style= "width:100%; height:100%; object-fit:cover">
+            {% endif %}
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="h-100 p-5 bg-body-tertiary border rounded-3">
+          <h2>{{ produit.nom }}</h2>
+          <p>Description : {{ produit.description }}</p>
+          <p>Identifiant produit : {{ produit.description }}</p>
+          <div class="d-flex justify-content-between">
+            {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_SUPER_ADMIN') %}
+              <a  class="btn btn-warning" href="{{ path('app_produit_edit', {'id': produit.id}) }}">{{'edit'|trans}}</a>
+              {{include('produit/_delete_form.html.twig')}}
+            {% endif %}
+            {%if is_granted('ROLE_USER') and not is_granted('ROLE_ADMIN') %}
+              <form action="{{ path('app_contenu_panier_new', {'id': produit.id}) }}" method="POST">
+                <button type="submit" class="btn btn-success">{{'default.add'|trans}}</button>
+              </form>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
 {% endblock %}
