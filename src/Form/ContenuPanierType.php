@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\ContenuPanier;
+use App\Entity\User;
 use App\Entity\Panier;
 use App\Entity\Produit;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;

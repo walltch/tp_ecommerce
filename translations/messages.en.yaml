@@ -12,6 +12,7 @@ base:
   cart: Cart
   cart-contents: Cart contents
   contact: Contact us
+  add-product: Add product
   sign-up: Sign up
   log-as: You are logged as
   log-out: Log out
@@ -21,10 +22,11 @@ default:
   add: Add to cart
   in-stock: in stock
   no-product: The page does not contain a product.
-  right-now: Right now
+  our-products : Our products
 
 edit-account: Edit my account
 edit: Edit
+delete: Delete
 view: View
 name: Name
 firt-name: First name
@@ -40,3 +42,6 @@ add-product: Add Product
 user: User
 user-not-found: User not found
 new-user: New user
+open: Open from
+open-time: Monday to Sunday from 7 am to 7 pm
+buy: Buy

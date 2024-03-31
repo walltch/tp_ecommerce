@@ -3,38 +3,44 @@
 {% block title %}{{'cart-contents-index'|trans}}{% endblock %}
 
 {% block body %}
-    <h1>{{'cart-contents-index'|trans}}</h1>
-
-    <table class="table">
+    <h1 class="text-center">{{'cart-contents-index'|trans}}</h1>
+    <table class="table container">
         <thead>
             <tr>
-                <th>Id</th>
+                <th>Nom du produit</th>
                 <th>Quantite</th>
+                <th>Prix</th>
                 <th>Date</th>
+                <th>{{'delete' | trans}}</th>
+                <th>Total</th>
             </tr>
         </thead>
         <tbody>
-        {% for contenu_panier in contenu_paniers %}
             <tr>
-                <td>{{ contenu_panier.id }}</td>
+                {% set totalCost = 0 %}
+                {% for contenu_panier in contenu_paniers %}
+                <td>{{ contenu_panier.produit.nom}}</td>
                 <td>{{ contenu_panier.quantite }}</td>
+                <td>{{ contenu_panier.produit.prix}} €</td>
                 <td>{{ contenu_panier.date ? contenu_panier.date|date('Y-m-d') : '' }}</td>
                 <td>
-                    <a href="{{ path('app_contenu_panier_show', {'id': contenu_panier.id}) }}">{{'view'|trans}}</a>
-                    <a href="{{ path('app_contenu_panier_edit', {'id': contenu_panier.id}) }}">{{'edit'|trans}}</a>
+                {% include 'contenu_panier/_delete_form.html.twig' with {'contenu_panier': contenu_panier} %}
                 </td>
+                <td>{{ contenu_panier.produit.prix * contenu_panier.quantite }} €</td>
             </tr>
-        {% else %}
+            {% set totalCost = totalCost + (contenu_panier.produit.prix * contenu_panier.quantite) %}     
+                {% else %}
             <tr>
                 <td colspan="4">no records found</td>
             </tr>
         {% endfor %}
-        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-            <a href="{{ path('app_panier_index') }}" class="btn btn-primary">{{'validate'|trans}}</a>
-        {% else %}
-            <a href="{{ path('app_login') }}" class="btn btn-primary">{{'validate'|trans}}</a>
-        {% endif %}
         </tbody>
     </table>
-
+    <div class=" container text-center">
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            <a href="{{ path('app_panier_index') }}" class="btn btn-primary">{{'buy'|trans}} {{ totalCost }} € </a>
+        {% else %}
+            <a href="{{ path('app_login') }}" class="btn btn-primary">{{'sign-in'|trans}}</a>
+        {% endif %}
+    </div>
 {% endblock %}

@@ -11,6 +11,7 @@ base:
   shop: Boutique
   cart: Mes commandes / Panier
   cart-contents: Contenu Panier
+  add-product: Ajouter un produit
   contact: Nous contacter
   sign-up: S'inscrire
   log-as: Vous êtes connecté en tant que
@@ -21,10 +22,11 @@ default:
   add: Ajouter au panier
   in-stock: en stock
   no-product: La page ne contient pas de produit.
-  right-now: En ce moment
+  our-products : Nos produits
 
 edit-account: Editer mon compte
-edit: Editer
+edit: Modifier
+delete: Supprimer
 view: Voir
 name: Nom
 firt-name: Prénom
@@ -40,3 +42,6 @@ add-product: Ajouter un produit
 user: Utilisateur
 user-not-found: Utilisateur non trouvé
 new-user: Nouvel utilisateur
+open: Ouvert de
+open-time: Lundi à Dimanche de 7h à 19h
+buy: Payer

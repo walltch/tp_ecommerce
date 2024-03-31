@@ -26,6 +26,9 @@ class ContenuPanier
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $date = null;
 
+    #[ORM\OneToOne()]
+    private ?User $UserId = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -76,6 +79,17 @@ class ContenuPanier
     {
         $this->date = $date;
 
+        return $this;
+    }
+
+    public function getUserId(): ?User
+    {
+        return $this->UserId;
+    }
+
+    public function setUserId(?User $UserId): static
+    {
+        $this->UserId = $UserId;
         return $this;
     }
 }

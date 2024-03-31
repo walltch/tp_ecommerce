@@ -37,6 +37,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $prenom = null;
 
+    #[ORM\OneToOne(mappedBy: 'UserId', cascade: ['persist', 'remove'])]
+    private ?ContenuPanier $UserId = null;
+
     public function getId(): ?int
     {
         return $this->id;

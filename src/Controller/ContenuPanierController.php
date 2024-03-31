@@ -43,7 +43,6 @@ class ContenuPanierController extends AbstractController
             $contenuPanier->setProduit($produit);
             $contenuPanier->setQuantite(1);
             $contenuPanier->setDate(new \DateTime());
-
             $entityManager->persist($contenuPanier);
         }
 
