@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\ContenuPanier;
 use App\Entity\User;
 use App\Form\UserType;
+use App\Repository\ContenuPanierRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -15,13 +17,13 @@ use Symfony\Component\Routing\Attribute\Route;
 class UserController extends AbstractController
 {
     #[Route('/', name: 'app_user_index', methods: ['GET'])]
-    public function index(UserRepository $userRepository): Response
+    public function index(UserRepository $userRepository , ContenuPanierRepository $ContenuPanierRepository): Response
     {
         return $this->render('user/index.html.twig', [  
             'users' => $userRepository->findAll(),
+            'contenu_paniers' => $ContenuPanierRepository->findAll(),
         ]);
     }
-
     #[Route('/new', name: 'app_user_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {

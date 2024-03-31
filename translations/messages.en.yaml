@@ -16,6 +16,7 @@ base:
   sign-up: Sign up
   log-as: You are logged as
   log-out: Log out
+  my-account: My account
 
 default:
   info: More info
@@ -45,3 +46,5 @@ new-user: New user
 open: Open from
 open-time: Monday to Sunday from 7 am to 7 pm
 buy: Buy
+users: Liste of users
+liste-paniers: Liste of abandonne carts

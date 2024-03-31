@@ -16,6 +16,7 @@ base:
   sign-up: S'inscrire
   log-as: Vous êtes connecté en tant que
   log-out: Déconnexion
+  my-account: Mon compte
 
 default:
   info: Plus d'infos
@@ -29,7 +30,7 @@ edit: Modifier
 delete: Supprimer
 view: Voir
 name: Nom
-firt-name: Prénom
+first-name: Prénom
 back: Retour
 price: Prix
 cart-index: Panier index
@@ -45,3 +46,6 @@ new-user: Nouvel utilisateur
 open: Ouvert de
 open-time: Lundi à Dimanche de 7h à 19h
 buy: Payer
+users: Liste des utilisateurs
+liste-paniers: Liste des paniers abandonnés
+name-product: Nom du produit
